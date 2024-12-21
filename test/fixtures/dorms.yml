@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  dorm_name: MyString
+  dorm_code: 1
+  student: one
+
+two:
+  dorm_name: MyString
+  dorm_code: 1
+  student: two

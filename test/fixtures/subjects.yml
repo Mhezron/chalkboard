@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject_name: MyString
+  subject_code: 1
+  teacher: one
+  dept: one
+
+two:
+  subject_name: MyString
+  subject_code: 1
+  teacher: two
+  dept: two

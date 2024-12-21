@@ -1,0 +1,23 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher_fname: MyString
+  teacher_lname: MyString
+  mobile_no: 1
+  email: MyString
+  sport: one
+  student: one
+  subject: one
+  activity: one
+  dept: one
+
+two:
+  teacher_fname: MyString
+  teacher_lname: MyString
+  mobile_no: 1
+  email: MyString
+  sport: two
+  student: two
+  subject: two
+  activity: two
+  dept: two
