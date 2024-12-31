@@ -1,3 +1,3 @@
 class Dorm < ApplicationRecord
-  belongs_to :student
+  has_many :students, dependent: :destroy
 end

@@ -1,0 +1,28 @@
+<h1>All Streams</h1>
+
+<table class="table table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th>Stream Name</th>
+      <th>Stream Code</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @streams.each do |stream| %>
+      <tr>
+        <td><%= stream.stream_name %></td>
+        <td><%= stream.stream_code %></td>
+        <td>
+          <div class="d-flex gap-2">
+            <%= link_to "Show", stream, class: "btn btn-outline-primary btn-sm fw-semibold shadow-sm" %>
+            <%= link_to "Edit", edit_stream_path(stream), class: "btn btn-outline-warning btn-sm fw-semibold shadow-sm" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New Stream', new_stream_path, class: "btn btn-primary mb-3" %>
+
+

@@ -1,0 +1,7 @@
+ <% content_for :title, "New Stream"  %>
+
+<h1>Create new Stream</h1>
+  <%= render 'form', stream: @stream %>
+
+  <br>
+  <%= link_to 'Back to Streams', streams_path %>

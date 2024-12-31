@@ -1,0 +1,7 @@
+ <% content_for :title, "New dorm"  %>
+
+<h1>Create new dorm</h1>
+  <%= render 'form', dorm: @dorm %>
+
+  <br>
+  <%= link_to 'Back to dorms', dorms_path %>

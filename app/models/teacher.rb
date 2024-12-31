@@ -4,4 +4,6 @@ class Teacher < ApplicationRecord
   belongs_to :subject
   belongs_to :activity
   belongs_to :dept
+
+
 end

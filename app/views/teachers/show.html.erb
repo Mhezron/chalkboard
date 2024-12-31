@@ -1,0 +1,5 @@
+<h1><%= @teacher.teacher_fname%></h1>
+<p><%= @teacher.teacher_lname%></p>
+
+<%= link_to 'Edit Teacher Info', edit_teacher_path(@teacher), class: "btn btn-secondary" %>
+<%= link_to 'Back to all teachers', teachers_path, class: "btn btn-primary" %>

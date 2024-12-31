@@ -1,0 +1,28 @@
+<h1>All dorms</h1>
+
+<table class="table table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th>dorm Name</th>
+      <th>dorm Code</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @dorms.each do |dorm| %>
+      <tr>
+        <td><%= dorm.dorm_name %></td>
+        <td><%= dorm.dorm_code %></td>
+        <td>
+          <div class="d-flex gap-2">
+            <%= link_to "Show", dorm, class: "btn btn-outline-primary btn-sm fw-semibold shadow-sm" %>
+            <%= link_to "Edit", edit_dorm_path(dorm), class: "btn btn-outline-warning btn-sm fw-semibold shadow-sm" %>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= link_to 'New dorm', new_dorm_path, class: "btn btn-primary mb-3" %>
+
+

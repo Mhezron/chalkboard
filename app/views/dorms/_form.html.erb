@@ -1,0 +1,15 @@
+<div class="container">
+    <%= form_with model: @dorm, local: true do |form| %>
+    <div>
+        <%= form.label :dorm_name %>
+        <%= form.text_field :dorm_name, class: "form-control" %>
+    </div>
+    <div>
+        <%= form.label :dorm_code %>
+        <%= form.text_field :dorm_code, class: "form-control" %>
+    </div>
+    <div style="margin-top: 20px;"">
+    <%= form.submit "Save Stream", class: "btn btn-primary"%>
+    </div>
+    <%end%>
+</div>

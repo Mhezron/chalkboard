@@ -1,0 +1,17 @@
+<% content_for :title, "Editing Dorm" %>
+</br>
+<h1>Editing dorm</h1>
+
+<%= render "form", dorm: @dorm %>
+
+
+<br>
+
+<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+  <div class="btn-group me-2" role="group" aria-label="First group">
+      <%= link_to "Back ", dorms_path, class: 'btn btn-secondary btn-sm fw-semibold shadow-sm' %>
+  </div>
+  <div class="btn-group me-2" role="group" aria-label="Second group">
+  <%= button_to "Delete", @dorm, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm fw-semibold shadow-sm" %>
+  </div>
+</div>

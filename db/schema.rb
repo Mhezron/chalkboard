@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2024_12_21_221836) do
+ActiveRecord::Schema[8.0].define(version: 2024_12_30_115642) do
   create_table "activities", force: :cascade do |t|
     t.string "activity_name"
     t.integer "activity_code"
@@ -34,10 +34,8 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_21_221836) do
   create_table "dorms", force: :cascade do |t|
     t.string "dorm_name"
     t.integer "dorm_code"
-    t.integer "student_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["student_id"], name: "index_dorms_on_student_id"
   end
 
   create_table "parents", force: :cascade do |t|
@@ -67,6 +65,15 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_21_221836) do
     t.integer "stream_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "student_fname"
+    t.string "student_lname"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "dorm_id", null: false
+    t.index ["dorm_id"], name: "index_students_on_dorm_id"
   end
 
   create_table "subjects", force: :cascade do |t|
@@ -102,10 +109,10 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_21_221836) do
   add_foreign_key "activities", "students"
   add_foreign_key "depts", "streams"
   add_foreign_key "depts", "subjects"
-  add_foreign_key "dorms", "students"
   add_foreign_key "parents", "students"
   add_foreign_key "sports", "students"
   add_foreign_key "sports", "teachers"
+  add_foreign_key "students", "dorms"
   add_foreign_key "subjects", "depts"
   add_foreign_key "subjects", "teachers"
   add_foreign_key "teachers", "activities"

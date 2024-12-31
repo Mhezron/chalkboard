@@ -1,0 +1,19 @@
+<div class="container">
+    <%= form_with model: @student, local: true do |form| %>
+    <div>
+        <%= form.label :student_fname, "First Name" %>
+        <%= form.text_field :student_fname, class: "form-control" %>
+    </div>
+    <div>
+        <%= form.label :student_lname, "Last Name" %>
+        <%= form.text_field :student_lname, class: "form-control" %>
+    </div>
+    <div class="mb-3">
+        <%= form.label :dorm_id, "Dormitory" %>
+        <%= form.collection_select :dorm_id, Dorm.all, :id, :dorm_name, { prompt: "Select a Dormitory" }, class: "form-select" %>
+    </div>
+    <div style="margin-top: 20px;"">
+    <%= form.submit "Save Student", class: "btn btn-primary"%>
+    </div>
+    <%end%>
+</div>
