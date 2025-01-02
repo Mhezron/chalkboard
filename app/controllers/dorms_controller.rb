@@ -1,6 +1,5 @@
 class DormsController < ApplicationController
   before_action :set_dorm, only: [:edit, :update, :show, :destroy]
-  has_many :students
   def index
     @dorms = Dorm.all
   end

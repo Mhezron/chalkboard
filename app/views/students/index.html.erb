@@ -1,202 +1,38 @@
-<div class="container-fluid vh-100">
-  <div class="row h-100">
-    <!-- Sidebar -->
-    <div class="col-md-2 bg-dark text-white p-0 min-vh-100">
-      <div class="sticky-top">
-        <div class="d-flex flex-column p-3">
-          <div class="d-flex align-items-center mb-4">
-            <i class="bi bi-shop fs-4 me-2"></i>
-            <h4 class="mb-0">Store Moja</h4>
-          </div>
-          
-          <nav class="nav flex-column w-100">
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-house-door me-2"></i> Dashboard
-            <% end %>
-            
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-box-seam me-2"></i> Inventory
-            <% end %>
-            
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-tags me-2"></i> Products
-            <% end %>
-            
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-cart me-2"></i> Orders
-            <% end %>
+<div class="container">
+  <h3>All Students</h3>
 
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-truck me-2"></i> Suppliers
-            <% end %>
-            
-            <%= link_to students_path, class: "nav-link text-white mb-2 d-flex align-items-center hover-highlight" do %>
-              <i class="bi bi-file-text me-2"></i> Reports
-            <% end %>
-            
-            <%= button_to students_path, 
-                method: :delete, 
-                class: "nav-link text-danger border-0 bg-transparent w-100 d-flex align-items-center mt-auto hover-highlight",
-                data: { turbo_method: :delete } do %>
-              <i class="bi bi-box-arrow-right me-2"></i> Sign Out
-            <% end %>
-          </nav>
-        </div>
-      </div>
-    </div>
+<table class="table table-striped">
+  <thead class="table-secondary">
+    <tr>
+      <th>First Name</th>
+      <th>Second Name</th>
+      <th>Last Name</th>
+      <th>ADM No</th>
+      <th>Dorm</th>
+      <th>Is Session?</th>
+      <th>stream</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @students.each do |student| %>
+      <tr>
+        <td><%= student.student_fname %></td>
+        <td><%= student.student_sname %></td>
+        <td><%= student.student_lname %></td>
+        <td><%= student.admission_no %></td>
+        <td><%= student.dorm&.dorm_name %></td>
+        <td><%= student.is_active ? 'Yes' : 'No' %></td>
+        <td><%= student.stream&.stream_name %></td>
+        
+        <td>
+          <%= link_to 'Show', student_path(student), class: 'btn btn-outline-primary btn-sm' %>
+          <%= link_to 'Edit', edit_student_path(student), class: 'btn btn-outline-warning btn-sm' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
 
-    <!-- Main Content -->
-    <div class="col-md-10 bg-light p-0">
-      <!-- Header -->
-      <div class="bg-white shadow-sm p-4 sticky-top">
-        <div class="d-flex justify-content-between align-items-center">
-          <div class="d-flex align-items-center">
-            <h3 class="mb-0">Welcome</h3>
-          </div>
-          
-          <div class="d-flex align-items-center">
-            <div class="dropdown me-3">
-              <button class="btn btn-link position-relative" data-bs-toggle="dropdown">
-                <i class="bi bi-bell fs-5"></i>
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                  3
-                </span>
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" href="#">Low stock alert: Printer Paper</a></li>
-                <li><a class="dropdown-item" href="#">New order #1234 received</a></li>
-                <li><a class="dropdown-item" href="#">Supplier delivery scheduled</a></li>
-              </ul>
-            </div>
-            
-            <%= link_to "Add Product", students_path, class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-
-      <!-- Dashboard Content -->
-      <div class="p-4">
-        <div class="row g-4">
-          <!-- Inventory Stats Card -->
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100 border-0 hover-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                  <div class="rounded-circle bg-primary bg-opacity-10 p-3 me-3">
-                    <i class="bi bi-box-seam text-primary"></i>
-                  </div>
-                  <h5 class="card-title mb-0">Inventory Status</h5>
-                </div>
-                <p class="card-text">
-                  <span class="h4"><%= @total_items %></span> Total Items<br>
-                  <small class="text-muted"><%= @low_stock_items %> items low in stock</small>
-                </p>
-                <%= link_to "View Inventory", students_path, class: "btn btn-outline-primary btn-sm stretched-link" %>
-              </div>
-            </div>
-          </div>
-
-          <!-- Orders Card -->
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100 border-0 hover-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                  <div class="rounded-circle bg-success bg-opacity-10 p-3 me-3">
-                    <i class="bi bi-cart-check text-success"></i>
-                  </div>
-                  <h5 class="card-title mb-0">Recent Orders</h5>
-                </div>
-                <p class="card-text">
-                  <span class="h4"><%= @pending_orders %></span> Pending Orders<br>
-                  <small class="text-muted"><%= @todays_orders %> new orders today</small>
-                </p>
-                <%= link_to "Process Orders", students_path, class: "btn btn-outline-primary btn-sm stretched-link" %>
-              </div>
-            </div>
-          </div>
-
-          <!-- Suppliers Card -->
-          <div class="col-md-4">
-            <div class="card shadow-sm h-100 border-0 hover-card">
-              <div class="card-body">
-                <div class="d-flex align-items-center mb-3">
-                  <div class="rounded-circle bg-info bg-opacity-10 p-3 me-3">
-                    <i class="bi bi-truck text-info"></i>
-                  </div>
-                  <h5 class="card-title mb-0">Supplier Orders</h5>
-                </div>
-                <p class="card-text">
-                  <span class="h4"><%= @pending_deliveries %></span> Expected Deliveries<br>
-                  <small class="text-muted"><%= @active_suppliers %> active suppliers</small>
-                </p>
-                <%= link_to "View Suppliers", students_path, class: "btn btn-outline-primary btn-sm stretched-link" %>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Recent Activity -->
-        <div class="card shadow-sm border-0 mt-4">
-          <div class="card-body">
-            <h4 class="card-title mb-4">Recent Activity</h4>
-            <div class="table-responsive">
-              <table class="table table-hover align-middle mb-0">
-                <thead class="table-light">
-                  <tr>
-                    <th>Activity</th>
-                    <th>Product</th>
-                    <th>Quantity</th>
-                    <th>Date</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td class="d-flex align-items-center">
-                      <i class="bi bi-box-arrow-in-down me-2 text-success"></i>
-                      Stock Received
-                    </td>
-                    <td>HP Printer Paper A4</td>
-                    <td>+500 units</td>
-                    <td>24th Nov 2024</td>
-                    <td><span class="badge bg-success">Completed</span></td>
-                    <td>
-                      <%= link_to "Details", "#", class: "btn btn-sm btn-outline-secondary" %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center">
-                      <i class="bi bi-cart-check me-2 text-primary"></i>
-                      Order Fulfilled
-                    </td>
-                    <td>Various Office Supplies</td>
-                    <td>-125 units</td>
-                    <td>23rd Nov 2024</td>
-                    <td><span class="badge bg-primary">Shipped</span></td>
-                    <td>
-                      <%= link_to "Details", "#", class: "btn btn-sm btn-outline-secondary" %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="d-flex align-items-center">
-                      <i class="bi bi-exclamation-triangle me-2 text-warning"></i>
-                      Low Stock Alert
-                    </td>
-                    <td>Sticky Notes 3x3</td>
-                    <td>15 units left</td>
-                    <td>22nd Nov 2024</td>
-                    <td><span class="badge bg-warning">Action Needed</span></td>
-                    <td>
-                      <%= link_to "Order", "#", class: "btn btn-sm btn-outline-secondary" %>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<%= link_to 'New Student', new_student_path, class: 'btn btn-success mb-3' %>
 </div>

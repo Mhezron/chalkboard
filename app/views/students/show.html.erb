@@ -1,6 +1,57 @@
-<h1>student Iformation</h1>
-<p>
-    <%=@student.student_fname %>
-    <%=@student.student_lname %>
-
-</p>
+.<div class="container">
+    <h3>Student Details</h3>
+    <div class="card" style="width: 18rem;">
+    <img src="https://via.placeholder.com/150" class="card-img-top" alt="...">
+    <div class="card-body">
+        <h5 class="card-title"><%= @student.student_fname %> <%= @student.student_sname %> <%= @student.student_lname %></h5>
+        <p class="card-text">Admission Number: <%= @student.admission_no %></p>
+    </div>
+</div>
+<ul class="list-group list-group-flush">
+  <li class="list-group-item"> 
+        <strong>First Name:</strong>
+        <%= @student.student_fname %>
+    </li>
+  <li class="list-group-item">
+    <strong>Second Name:</strong>
+    <%= @student.student_sname %></li>
+  <li class="list-group-item">
+<strong>Last Name:</strong>
+        <%= @student.student_lname %>
+  </li>
+  <li class="list-group-item">
+<strong>Admission Number:</strong>
+        <%= @student.admission_no %>
+  </li>
+  <li class="list-group-item">
+    <strong>Stream:</strong>
+        <%= @student.stream&.stream_name %>
+  </li>
+  <li class="list-group-item">
+    <strong>Dormitory:</strong>
+        <%= @student.dorm&.dorm_name %>
+  </li>
+  <li class="list-group-item">
+    <strong>Date of Admission:</strong>
+        <%= @student.date_of_admission %>
+  </li>
+  <li class="list-group-item">
+    <strong>Date of Birth:</strong>
+        <%= @student.date_of_birth %>
+  </li>
+  <li class="list-group-item">
+    <strong>Is Student Active?:</strong>
+        <%= @student.is_active %>
+  </li>
+  <li class="list-group-item">
+  </li>
+</ul>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2">
+            <%= link_to 'Edit', edit_student_path(@student), class: 'btn btn-warning' %>
+        </div>
+        <div class="btn-group me-2">
+        <%= button_to 'Delete', @student, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+        </div>
+    </div>
+    <%= link_to 'Back to Students', students_path %>

@@ -1,19 +1,69 @@
 <div class="container">
-    <%= form_with model: @student, local: true do |form| %>
-    <div>
-        <%= form.label :student_fname, "First Name" %>
-        <%= form.text_field :student_fname, class: "form-control" %>
-    </div>
-    <div>
-        <%= form.label :student_lname, "Last Name" %>
-        <%= form.text_field :student_lname, class: "form-control" %>
-    </div>
-    <div class="mb-3">
-        <%= form.label :dorm_id, "Dormitory" %>
-        <%= form.collection_select :dorm_id, Dorm.all, :id, :dorm_name, { prompt: "Select a Dormitory" }, class: "form-select" %>
-    </div>
-    <div style="margin-top: 20px;"">
-    <%= form.submit "Save Student", class: "btn btn-primary"%>
-    </div>
-    <%end%>
+    <%= form_with(model: student, local: true) do |form| %>
+  <div class="mb-3">
+    <%= form.label :student_fname, "First Name", class: 'form-label fw-bold text-primary'  %>
+    <%= form.text_field :student_fname, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :student_sname, "Second Name", class: 'form-label fw-bold text-primary'  %>
+    <%= form.text_field :student_sname, class: 'form-control' %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :student_lname, "Last Name", class: 'form-label fw-bold text-primary'  %>
+    <%= form.text_field :student_lname, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :gender, class: 'form-label fw-bold text-primary'  %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :dorm_id, "Dormitory", class: 'form-label fw-bold text-primary'  %>
+    <%= form.collection_select :dorm_id, Dorm.all, :id, :dorm_name, { prompt: 'Select a Dorm' }, { class: 'form-control' } %>
+  </div>
+
+<div class="mb-4">
+  <%= form.label :date_of_birth, 'Date of Birth', class: 'form-label fw-bold text-primary' %>
+  <div class="d-flex flex-wrap gap-2">
+    <%= form.select(:'date_of_birth(3i)', (1..31).map { |d| [d, d] }, { prompt: 'Day' }, class: 'form-select w-auto') %>
+    <%= form.select(:'date_of_birth(2i)', Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }, { prompt: 'Month' }, class: 'form-select w-auto') %>
+    <%= form.select(:'date_of_birth(1i)', ((Date.current.year - 100)..Date.current.year).to_a.reverse, { prompt: 'Year' }, class: 'form-select w-auto') %>
+  </div>
+</div>
+
+
+  <div class="mb-3">
+    <%= form.label :admission_no, class: 'form-label fw-bold text-primary'  %>
+    <%= form.text_field :admission_no, class: 'form-control', required: true %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :is_active, class: 'form-label fw-bold text-primary'  %>
+    <%= form.check_box :is_active %>
+  </div>
+
+<div class="mb-4">
+  <%= form.label :date_of_admission, 'Date of Admission', class: 'form-label fw-bold text-primary' %>
+  <div class="d-flex flex-wrap gap-2">
+    <%= form.select(:'date_of_admission(3i)', (1..31).map { |d| [d, d] }, { prompt: 'Day' }, class: 'form-select w-auto') %>
+    <%= form.select(:'date_of_admission(2i)', Date::MONTHNAMES.compact.each_with_index.map { |m, i| [m, i + 1] }, { prompt: 'Month' }, class: 'form-select w-auto') %>
+    <%= form.select(:'date_of_admission(1i)', ((Date.current.year - 100)..Date.current.year).to_a.reverse, { prompt: 'Year' }, class: 'form-select w-auto') %>
+  </div>
+</div>
+
+  <div class="mb-3">
+    <%= form.label :stream_id, class: 'form-label fw-bold text-primary'  %>
+    <%= form.collection_select :stream_id, Stream.all, :id, :stream_name, { prompt: 'Select a Stream' }, { class: 'form-control' } %>
+  </div>
+
+  <div>
+    <%= form.submit 'Save Student', class: 'btn btn-success' %>
+  </div>
+  <div>
+    <%= link_to 'Back to Students', students_path %>
+  </div>
+<% end %>
+
 </div>

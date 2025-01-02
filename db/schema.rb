@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2024_12_30_115642) do
+ActiveRecord::Schema[8.0].define(version: 2025_01_02_154819) do
   create_table "activities", force: :cascade do |t|
     t.string "activity_name"
     t.integer "activity_code"
@@ -36,6 +36,17 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_115642) do
     t.integer "dorm_code"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "exams", force: :cascade do |t|
+    t.string "exam_name"
+    t.integer "grade"
+    t.integer "student_id", null: false
+    t.integer "teacher_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_exams_on_student_id"
+    t.index ["teacher_id"], name: "index_exams_on_teacher_id"
   end
 
   create_table "parents", force: :cascade do |t|
@@ -67,12 +78,36 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_115642) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_academics", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "student_medicals", force: :cascade do |t|
+    t.string "allergies"
+    t.string "blood_Group"
+    t.string "medical_condition"
+    t.integer "emergency_contact"
+    t.string "emergency_person"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "student_id", null: false
+    t.index ["student_id"], name: "index_student_medicals_on_student_id"
+  end
+
   create_table "students", force: :cascade do |t|
     t.string "student_fname"
     t.string "student_lname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "dorm_id", null: false
+    t.date "date_of_birth"
+    t.string "admission_no"
+    t.boolean "is_active"
+    t.date "date_of_admission"
+    t.string "student_sname"
+    t.integer "gender", default: 0
+    t.integer "stream_id"
     t.index ["dorm_id"], name: "index_students_on_dorm_id"
   end
 
@@ -109,9 +144,12 @@ ActiveRecord::Schema[8.0].define(version: 2024_12_30_115642) do
   add_foreign_key "activities", "students"
   add_foreign_key "depts", "streams"
   add_foreign_key "depts", "subjects"
+  add_foreign_key "exams", "students"
+  add_foreign_key "exams", "teachers"
   add_foreign_key "parents", "students"
   add_foreign_key "sports", "students"
   add_foreign_key "sports", "teachers"
+  add_foreign_key "student_medicals", "students"
   add_foreign_key "students", "dorms"
   add_foreign_key "subjects", "depts"
   add_foreign_key "subjects", "teachers"

@@ -5,3 +5,11 @@
     height: 40px;
     border-radius: 35%;
 }
+
+.alert-progress {
+    height: 4px; /* Adjust height as needed */
+    background-color: rgba(0, 123, 255, 0.5); /* Bootstrap primary color */
+    width: 100%;
+}
+
+

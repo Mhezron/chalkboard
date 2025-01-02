@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <title><%= content_for?(:title) ? yield(:title) : "Chalkboard" %></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <!-- Additional Head Content -->
     <%= yield :head %>
 
@@ -23,20 +23,84 @@
     <!-- JavaScript -->
     <%= javascript_importmap_tags %>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-  </head>
+</head>
 
-  <body>
+<body>
     <div class="container">
-      <!-- Flash Notifications -->
-      <% if notice || alert %>
-        <div class="my-3">
-          <%= render 'layouts/alerts' %>
-        </div>
-      <% end %>
+        <!-- Flash Notifications -->
+        <div class="alert-wrapper">
+            <% if notice %>
+                <div class="alert alert-success alert-dismissible fade show" role="alert" data-auto-dismiss="5000">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-check-circle-fill me-2" aria-hidden="true"></i>
+                        <%= notice %>
+                    </div>
+                    <div class="alert-progress"></div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% end %>
 
-      <!-- Page Content -->
-      
+            <% if alert %>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert" data-auto-dismiss="5000">
+                    <div class="d-flex align-items-center">
+                        <i class="bi bi-exclamation-circle-fill me-2" aria-hidden="true"></i>
+                        <%= alert %>
+                    </div>
+                    <div class="alert-progress"></div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            <% end %>
+        </div>
+        <!-- Page Content -->
+        <%= yield %>
     </div>
-    <%= yield %>
-  </body>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Function to handle alert dismissal
+        function setupAlertDismissal(alert) {
+            const dismissTimeout = parseInt(alert.dataset.autoDismiss) || 200;
+            const progressBar = alert.querySelector('.alert-progress');
+            
+            // Start progress bar animation
+            if (progressBar) {
+                progressBar.style.transition = `width ${dismissTimeout}ms linear`;
+                progressBar.offsetHeight; // Force a reflow
+                progressBar.style.width = '100%';
+            }
+
+            // Set timeout for alert removal
+            setTimeout(() => {
+                alert.classList.add('fade-out');
+                setTimeout(() => {
+                    alert.remove();
+                }, 500);
+            }, dismissTimeout);
+
+            // Pause timer on hover
+            alert.addEventListener('mouseenter', () => {
+                if (progressBar) {
+                    progressBar.style.transition = 'none';
+                }
+            });
+
+            // Resume timer on mouse leave
+            alert.addEventListener('mouseleave', () => {
+                if (progressBar) {
+                    progressBar.style.transition = `width ${dismissTimeout}ms linear`;
+                    progressBar.style.width = '100%';
+                }
+            });
+        }
+
+        // Setup all alerts
+        document.querySelectorAll('.alert[data-auto-dismiss]').forEach(setupAlertDismissal);
+
+        // Setup for Turbo Drive if using Hotwire/Turbo
+        document.addEventListener('turbo:load', function() {
+            document.querySelectorAll('.alert[data-auto-dismiss]').forEach(setupAlertDismissal);
+        });
+    });
+    </script>
+</body>
 </html>

@@ -1,17 +1,6 @@
-<% content_for :title, "Editing student" %>
-</br>
-<h1>Editing student</h1>
+<div class="container">
+<h3>Edit Student</h3>
 
-<%= render "form", student: @student %>
+<%= render 'form', student: @student %>
 
-
-<br>
-
-<div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-  <div class="btn-group me-2" role="group" aria-label="First group">
-      <%= link_to "Back ", students_path, class: 'btn btn-secondary btn-sm fw-semibold shadow-sm' %>
-  </div>
-  <div class="btn-group me-2" role="group" aria-label="Second group">
-  <%= button_to "Delete", @student, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger btn-sm fw-semibold shadow-sm" %>
-  </div>
 </div>

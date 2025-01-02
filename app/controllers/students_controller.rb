@@ -25,16 +25,17 @@ class StudentsController < ApplicationController
   end
 
   def update
-    @student = Student.update(student_params)
-    if @student.update
+    if @student.update(student_params)
       redirect_to students_path, notice: "Student saved successfully"
     else
-      render edit, status: :unprocessable_entity
+      Rails.logger.debug "Update failed: #{@student.errors.full_messages.join(', ')}"
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @student.destroy
+    redirect_to students_path, notice: "student deleted successfully"
   end
 
   private
@@ -46,6 +47,6 @@ class StudentsController < ApplicationController
   end
 
   def student_params
-    params.require(:student).permit(:student_fname, :student_lname, :dorm_id)
+    params.require(:student).permit(:student_fname, :student_lname, :dorm_id, :student_sname, :date_of_birth, :admission_no, :is_active, :date_of_admission, :stream_id)
   end
 end

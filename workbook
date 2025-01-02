@@ -1,0 +1,13 @@
+student information that needs to be stored 
+
+ 
+sports played
+
+class
+subjects taken 
+dormitory
+
+
+student clubs
+exam results 
+class teacher name
