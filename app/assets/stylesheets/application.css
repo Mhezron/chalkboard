@@ -1,15 +1,31 @@
 
+  /* Logo Styling */
+  .logo {
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    border-radius: 50%; /* Makes the logo circular */
+    object-fit: cover; /* Ensures proper fit for image content */
+  }
   
-.logo {
-    width: 40px;
-    height: 40px;
-    border-radius: 35%;
-}
-
-.alert-progress {
+  /* Alert Progress Bar Styling */
+  .alert-progress {
     height: 4px; /* Adjust height as needed */
     background-color: rgba(0, 123, 255, 0.5); /* Bootstrap primary color */
-    width: 100%;
-}
-
-
+    width: 100%; /* Makes the bar span full width */
+    border-radius: 2px; /* Optional: Slightly round the corners */
+  }
+  
+  /* Example for adding animation to the progress bar */
+  .alert-progress-active {
+    animation: progressSlide 2s infinite;
+  }
+  
+  @keyframes progressSlide {
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
+  }
+  

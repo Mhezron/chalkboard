@@ -1,30 +1,41 @@
-<div class="container" >
-    <h1>New Teacher</h1>
 
+    <h3>New Teacher</h3>
+<form class="row g-3" >
 <%= form_with model: @teacher, local: true do |form| %>
-<div>
-    <%= form.label :First_name %>
+<div class="col-md-6">
+    <%= form.label :First_name, class: "form-label fw-bold text-primary" %>
     <%= form.text_field :teacher_fname, class: "form-control"%>
 </div>
 
-<div>
-    <%= form.label :Last_name %>
+<div class="col-md-6">
+    <%= form.label :Last_name, class: "form-label fw-bold text-primary" %>
     <%= form.text_field :teacher_lname, class: "form-control"%>
 </div>
 
 <div>
-    <%= form.label :mobile_no %>
+    <%= form.label :mobile_no, class: "form-label fw-bold text-primary" %>
     <%= form.number_field :mobile_no, class: "form-control"%>
 </div>
 
 <div>
-    <%= form.label :email %>
+    <%= form.label :email, class: "form-label fw-bold text-primary" %>
     <%= form.email_field :email, class: "form-control"%>
 </div>
 
-<div style="margin-top: 20px;"">
-    <%= form.submit "Add Teacher", class: "btn btn-primary"%>
+<div class="col-md-6">
+    <%= form.label :dept_id, class: "form-label fw-bold text-primary" %>
+    <%= form.collection_select :dept_id, Dept.all, :id, :dept_name, { prompt: "Select a Deparment" }, { class: "form-control" }  %>
 </div>
+
+<div class="col-md-6">
+    <%= form.label :subject_id, class: "form-label fw-bold text-primary" %>
+    <%= form.collection_select :subject_id, Subject.all, :id, :subject_name, { prompt: "Select a Subject" }, { class: "form-control" }%>
+</div>
+
+<div style="margin-top: 20px;">
+    <%= form.submit "Add Teacher", class: "btn btn-success"%>
+</div>
+<%= link_to 'Back To Teachers', teachers_path %>
 
 <% end %>
 </div>
